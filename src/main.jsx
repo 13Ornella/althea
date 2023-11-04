@@ -1,8 +1,9 @@
-import ReactDOM from 'react-dom';
-import App from './App'; // Remplacez './App' par le chemin de votre composant principal
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App';
 
 const root = document.getElementById('root');
-const rootInstance = ReactDOM.createRoot(root);
+const rootInstance = createRoot(root);
 rootInstance.render(
   <React.StrictMode>
     <App />

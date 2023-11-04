@@ -6,10 +6,10 @@ export default {
   ],
   theme: {
     extend: {
-      colors:{
-        primary:'#060665',
-      },
+      backgroundImage: {
+        'hero-pattern': "url('')"
     },
   },
   plugins: [],
+}
 }
