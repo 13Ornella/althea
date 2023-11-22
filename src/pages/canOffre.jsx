@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../Header";
 import { Link } from "react-router-dom";
+import Flydash from "./Flydash";
 
 export default function CanOffre() {
   const [offre, setOffre] = useState([]);
@@ -24,6 +25,7 @@ export default function CanOffre() {
 
   return (
     <div className="">
+      <Flydash/>
       <Header />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
@@ -39,8 +41,8 @@ export default function CanOffre() {
                     <div className="px-6 py-4">
                       <div className="font-bold text-xl mb-2">{callout.name}</div>
                       <p className="text-gray-700 text-base">{callout.description}</p>
-                      <p className="text-gray-700 text-base">{callout.experience} ans d'experience</p>
-                      <p>{callout.date}</p>
+                      <p className="text-gray-700 text-base">Ayant au moins {callout.experience} ans d'experience</p>
+                      <p>Expire le: {new Date(callout.date).toLocaleDateString()}</p>
                     </div>
                     {/* Utilisez le gestionnaire d'événements pour le clic sur le lien "Postuler" */}
                     <Link

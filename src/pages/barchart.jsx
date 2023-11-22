@@ -48,13 +48,13 @@ export default function Barchart() {
     <div className='bg-white p-6 rounded-sm border-gray-200 flex flex-col shadow-md mt-0 ml-0'>
       
     <BarChart
-      width={640}
+      width={600}
       height={300}
       data={data}
       margin={{
         top: 20,
         right: 30,
-        left: -30,
+        left: -20,
         bottom: 5,
       }}
     >

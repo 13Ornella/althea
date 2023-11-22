@@ -1,23 +1,18 @@
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { Link } from 'react-router-dom';
 
 export default function Flydash() {
   return (
     <div className="absolute right-0 z-10 mt-1 mr-4 origin-top-right rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-gray-400 bg-opacity-20 px-4 py-2 text-sm font-semibold 
-          text-white hover:bg-opacity-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                   <div  className="flex float-right  border border-gray-400 bg-gray-400 rounded-full text-white">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
-              className="w-5 h-5">
-  <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0
-   0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
-</svg>  
-</div>
+        <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-semibold 
+          text-white hover:bg-opacity-10 focus:outline-none focus-visible:ring-2  focus-visible:ring-opacity-75">
+   Options
             <ChevronDownIcon
-              className="ml-2 -mr-1 h-5 w-5 mt-2 text-white-200 hover:text-violet-100"
+              className="ml-2 -mr-1 h-5 w-5  text-white-200 hover:text-violet-100"
               aria-hidden="true"
             />
           </Menu.Button>
@@ -33,55 +28,12 @@ export default function Flydash() {
         >
           <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="px-1 py-1 ">
+              
+                         </div>
+                         <div className="px-1 py-1">
               <Menu.Item>
                 {({ active }) => (
-                  <button
-                    className={`${
-                      active ? 'bg-gray-400 text-white' : 'text-gray-900'
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  >
-                    {active ? (
-                      <EditActiveIcon
-                        className="mr-2 h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <EditInactiveIcon
-                        className="mr-2 h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    )}
-                    Langues
-                  </button>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? 'bg-gray-400 text-white' : 'text-gray-900'
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  >
-                    {active ? (
-                      <DuplicateActiveIcon
-                        className="mr-2 h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <DuplicateInactiveIcon
-                        className="mr-2 h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    )}
-                    Mode
-                  </button>
-                )}
-              </Menu.Item>
-            </div>
-            <div className="px-1 py-1">
-              <Menu.Item>
-                {({ active }) => (
-                  <button
+                  <a href='https://www.althea.mg/'
                     className={`${
                       active ? 'bg-gray-400 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -98,12 +50,12 @@ export default function Flydash() {
                       />
                     )}
                     Aides
-                  </button>
+                  </a>
                 )}
               </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
-                  <button
+                  <Link to={'/home'}
                     className={`${
                       active ? 'bg-gray-400 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -120,35 +72,11 @@ export default function Flydash() {
                       />
                     )}
                     Quitter
-                  </button>
+                  </Link>
                 )}
               </Menu.Item>
             </div>
-            <div className="px-1 py-1">
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? 'bg-gray-400 text-white' : 'text-gray-900'
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  >
-                    {active ? (
-                      <DeleteActiveIcon
-                        className="mr-2 h-5 w-5 text-violet-400"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <DeleteInactiveIcon
-                        className="mr-2 h-5 w-5 text-violet-400"
-                        aria-hidden="true"
-                      />
-                    )}
-                    Deconnexion
-                  </button>
-                )}
-              </Menu.Item>
-            </div>
-          </Menu.Items>
+            </Menu.Items>
         </Transition>
       </Menu>
     </div>

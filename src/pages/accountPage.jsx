@@ -9,6 +9,7 @@ export default function accountPage() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const offreId = searchParams.get("id");
+  const [file, setFile] = useState();
   const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
@@ -20,7 +21,6 @@ export default function accountPage() {
     niveau:'',
     experience:'',
     adresse:'',
-    cv:'',
     offreId: offreId
   });
 
@@ -28,10 +28,31 @@ export default function accountPage() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3001/account', formData);
+      const formD = new FormData()
+      formD.append('nom', formData.nom)
+      formD.append('prenom', formData.prenom)
+      formD.append('email', formData.email)
+      formD.append('telephone', formData.telephone)
+      formD.append('situation', formData.situation)
+      formD.append('sexe', formData.sexe)
+      formD.append('domaine', formData.domaine)
+      formD.append('niveau', formData.niveau)
+      formD.append('experience', formData.experience)
+      formD.append('adresse', formData.adresse)
+      formD.append('offreId', offreId)
+      formD.append('file',file)
+      const response = await axios.post('http://localhost:3001/account', formD);
       console.log('Response from server:', response.data);
       alert ("Informations enregistrées avec succes!")
       // Vous pouvez faire quelque chose avec la réponse du serveur ici
+
+      /*const formD = new FormData()
+      formD.append('formData', formData)
+      formD.append('file',file)
+      axios.post('http://localhost:3001/account', formD)
+      .then(res => {})
+      .catch(err => console.log(err));*/
+
     } catch (error) {
       console.error('Error:', error);
     }
@@ -45,18 +66,16 @@ export default function accountPage() {
   };
   
   return (
+    
     <div>
-      
-    <div >
-    <form className="mt-30" onSubmit={handleSubmit} method="POST">
+     
+    <div className="" >
+    <Header/>
+    <form  onSubmit={handleSubmit} method="POST">
       
       <div className="space-y-12 mt-6 mr-30 ml-30 place-content-center p-4">
-        
-
-        <div className="border-b border-gray-900/10 pb-12">
-          <h2 className=" font-bold leading-7 text-blue-950 text-2xl">Informations personnelles</h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">Utilisez une adresse permanente pour recevoir les emails.</p>
-
+          <h2 className=" font-bold leading-7 text-blue-950 text-3xl mt-20">Informations personnelles</h2>
+         
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
           <input
@@ -237,7 +256,7 @@ export default function accountPage() {
               </div>
             </div>
           </div>
-        </div>
+        
  
         <div className="sm:col-span-2 ">
               <label htmlFor="domaine" className="block text-sm font-medium leading-6 text-gray-900">
@@ -263,12 +282,11 @@ export default function accountPage() {
               <div className="mt-2 flex">
                 <input 
                   type="file"
-                  name="cv"
+                  name="file"
                   id="cv"
                   autoComplete="street-address"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  value={formData.cv}
-                  onChange={handleChange}
+                  onChange={(e)=>setFile(e.target.files[0])}
                 />
               </div>
               </div> 
