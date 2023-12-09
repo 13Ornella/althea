@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Flydash from "./Flydash";
 import Statistique from "./statistique";
 import Barchart from "./barchart";
 import Sidebar from "./sidebar";
@@ -102,7 +101,7 @@ useEffect(() => {
           <div className="flex flex-col lg:flex-row ">
             <Sidebar/>     
            <FlyoutMenu/>
-           <div className="sm:fixed"></div>
+           <div className="sm:fixed "></div>
 <div className="border border-gray-300 bg-gray-150 shadow-md flex-1 h-16">
 
 <div className="relative fixed ">
@@ -130,7 +129,7 @@ useEffect(() => {
 <path d="m.135 7.847 1.542 1.417c3.6 3.712 12.747 3.7 16.635.01L19.605 7.9A.98.98 0 0 1 20 7.652V6a2 2 0 0 0-2-2h-3V3a3 3 0 0 0-3-3H8a3 3 0 0 0-3 3v1H2a2 2 0 0 0-2 2v1.765c.047.024.092.051.135.082ZM10 10.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5ZM7 3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1H7V3Z"/>
 </svg> 
 {Array.isArray(nbOffre) && (
-  <div className="font-bold text-2xl text-blue-950">
+  <div className="font-bold text-2xl text-blue-950 mt-4">
 
     Offres: {nbOffre.length}
     <select
@@ -164,10 +163,10 @@ useEffect(() => {
             </div>
             <Statistique/>
             <Barchart/>
-            <div className="mt-6 gap-4 grid grid-cols-2 mr-20 flex">
-
+            <div className="mt-6 gap-4 grid grid-cols-2 mr-22 flex">
 </div>   
 </div>
+
 <div className="overflow-auto rounded-lg shadow">
 <table className="w-full overflow-auto rounded-md shadow-md">
 <thead className="bg-gray-300 boder-b-2 border-gray-300 rounded-md">
@@ -189,6 +188,7 @@ useEffect(() => {
 
   {Array.isArray(filteredCandidatures) &&
   filteredCandidatures.map((callout, index) => (
+    <tbody key={index}>
       <tr key={index}>
     <td className="hidden">{callout.id}</td>
     <td className="p-4 text-sm text-gray-600">{callout.nom}</td>
@@ -199,8 +199,8 @@ useEffect(() => {
     <td className="p-4 text-sm text-gray-600">{callout.sexe}</td>
     <td className="p-4 text-sm text-gray-600">{callout.domaine}</td>
     <td className="p-4 text-sm text-gray-600">{callout.niveau}</td>
-    <td className="p-4 text-sm text-gray-600">{callout.experience}</td>
-    <td className="p-4 text-sm text-gray-600">{callout.adresse}</td>
+    <td className="p-4 text-sm text-gray-600">{callout.experience} ans</td>
+    <td className="p-4 text-sm text-gray-600">{callout.adresse} </td>
    <td className="p-4 text-sm text-gray-600"><Link to={`/candidat?id=${callout.id}`}>
     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
       <path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>
@@ -214,6 +214,7 @@ useEffect(() => {
       0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
     </td>
   </tr>
+  </tbody>
     ))}
 
 </table>

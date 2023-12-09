@@ -6,7 +6,7 @@ import axios from 'axios';
 import Validation from "./loginValidation";
 import useAuthentication from "./Authentification";
 
-export default function loginPage(){
+export default function login(){
   const { handleLogin } = useAuthentication();
   const [formData, setFormData] = useState({
     email: '',
@@ -27,9 +27,9 @@ export default function loginPage(){
     .then(res=>{
       if(res.data.Login){
         alert('Vous êtes authentifié!')
-        navigate('/dashboard')
+        navigate('/canOffre')
       }else{
-        alert("Erreur d'authentifiaction! verifiez votre email ou votre mot de passe")
+        alert("N")
         navigate('/login')
       }
     })
@@ -54,12 +54,12 @@ export default function loginPage(){
        bg-[url('https://t3.ftcdn.net/jpg/03/57/42/44/240_F_357424456_opkWVSfxNmiFdQe4tRoWsXxZa8IRSkH7.jpg')]
        ">
             <div className="px-4 py-6 mx-4 md:mx-8 text-white">
-              <h4 className="mb-4 text-4xl text-blue-950 font-bold">GESTION DE RECRUTEMENT ALTHEA</h4>
+              <h4 className="mb-4 text-4xl text-blue-950 font-bold text-center">BIENVENU! </h4>
               <p className="text-2xl text-blue-950 font-bold text-center"> 
-               Bienvenu! administrateur 
+               Avez-vous deja un compte?  
               </p> <br /> <br />
               <p className="text-xl text-blue-950 font-semibold text-center">
-               Pour acceder a votre tableau de bord, veillez vous connectez a votre compte.
+               Veillez vous connectez a votre compte.
                <br/> Si vous etes nouveau, cliquez sur le lien et creez votre compte
               </p>
             </div>

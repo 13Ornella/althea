@@ -1,44 +1,18 @@
 import { Menu, Transition } from '@headlessui/react';
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { Fragment } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import { useTranslation } from 'react-i18next';
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Logout from './logout';
+import { Link } from 'react-router-dom';
 
-export default function FlyoutMenu() {
-  const navigate = useNavigate();
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  const openModal = () => {
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
-  const handleLogout = () => {
-    // Perform the logout operation, which might include clearing session data or sending a request to the server to invalidate the user's session.
-
-    // After logout, navigate to the home page.
-    navigate('/login'); // Replace '/' with the actual route to your home page.
-  };
-  
-  
-  const handleLanguageChange = (language) => {
-    setSelectedLanguage(language);
-  };
-
+export default function Flydash2() {
   return (
     <div className="fixed absolute right-0 z-10 mt-2 mr-4 origin-top-right rounded-md fixed py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-semibold 
+        <Menu.Button className="mr-10 inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-semibold 
           text-white hover:bg-opacity-10 focus:outline-none focus-visible:ring-2  focus-visible:ring-opacity-75">
-            Options
+   Options
             <ChevronDownIcon
-              className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
+              className="ml-2 -mr-1 h-5 w-5  text-white-200 hover:text-violet-100"
               aria-hidden="true"
             />
           </Menu.Button>
@@ -54,8 +28,9 @@ export default function FlyoutMenu() {
         >
           <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="px-1 py-1 ">
-                      </div>
-            <div className="px-1 py-1">
+              
+                         </div>
+                         <div className="px-1 py-1">
               <Menu.Item>
                 {({ active }) => (
                   <a href='https://www.althea.mg/'
@@ -80,7 +55,7 @@ export default function FlyoutMenu() {
               </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
-                  <Link to={'/dashboard'}
+                  <Link to={'/home'}
                     className={`${
                       active ? 'bg-gray-400 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -100,38 +75,32 @@ export default function FlyoutMenu() {
                   </Link>
                 )}
               </Menu.Item>
-            </div>
-            <div className="px-1 py-1">
               <Menu.Item>
                 {({ active }) => (
-                  <button
-                  type='submit'
+                  <Link to={'/dashboard'}
                     className={`${
                       active ? 'bg-gray-400 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={openModal}
                   >
                     {active ? (
-                      <DeleteActiveIcon
-                        className="mr-2 h-5 w-5 text-violet-400"
+                      <DuplicateActiveIcon
+                        className="mr-2 h-5 w-5"
                         aria-hidden="true"
                       />
                     ) : (
-                      <DeleteInactiveIcon
-                        className="mr-2 h-5 w-5 text-violet-400"
+                      <DuplicateInactiveIcon
+                        className="mr-2 h-5 w-5"
                         aria-hidden="true"
                       />
                     )}
-                    Deconnexion
-                  </button>
+                    Retour
+                  </Link>
                 )}
               </Menu.Item>
             </div>
-          </Menu.Items>
+            </Menu.Items>
         </Transition>
       </Menu>
-      {isModalOpen && (
-            <Logout /> )}
     </div>
   )
 }
@@ -172,20 +141,20 @@ function MoveActiveIcon(props) {
   )
 }
 
-function DeleteInactiveIcon(props) {
+function DuplicateInactiveIcon(props) {
   return (
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 pb-1 pr-1 font-bold">
-  <path fillRule="evenodd" d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm10.72 4.72a.75.75 0 011.06 0l3 3a.75.75 0 010 1.06l-3 3a.75.75 0 11-1.06-1.06l1.72-1.72H9a.75.75 0 010-1.5h10.94l-1.72-1.72a.75.75 0 010-1.06z" clipRule="evenodd" />
-</svg>
-
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 mr-2 ">
+    <path fillRule="evenodd" d="M7.72 12.53a.75.75 0 010-1.06l7.5-7.5a.75.75 0 111.06 1.06L9.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5z" clipRule="evenodd" />
+  </svg>
+  
   )
 }
 
-function DeleteActiveIcon(props) {
+function DuplicateActiveIcon(props) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 pb-1 pr-1 font-bold">
-    <path fillRule="evenodd" d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm10.72 4.72a.75.75 0 011.06 0l3 3a.75.75 0 010 1.06l-3 3a.75.75 0 11-1.06-1.06l1.72-1.72H9a.75.75 0 010-1.5h10.94l-1.72-1.72a.75.75 0 010-1.06z" clipRule="evenodd" />
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 mr-2 ">
+    <path fillRule="evenodd" d="M7.72 12.53a.75.75 0 010-1.06l7.5-7.5a.75.75 0 111.06 1.06L9.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5z" clipRule="evenodd" />
   </svg>
   
-  );
+  )
 }

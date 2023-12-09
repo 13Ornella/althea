@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Flydash2 from "./flydash2";
 
 //pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -148,6 +149,7 @@ adresse:'',
     return(
             <div className="">
                 <Header/>
+                <Flydash2/>
                 <div className="mr-30 ml-30 p-4">
               <div className="px-4 sm:px-0 mt-20 ">
               
@@ -200,32 +202,29 @@ adresse:'',
                     <dt className="text-sm font-medium leading-6 text-gray-900">Adresse</dt>
                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{callout.adresse}</dd>
                   </div>
+          
                   <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0 mt-6 border-t border-gray-200">
-                  <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0 mt-6 border-t border-gray-200">
-      <dt className="text-sm font-medium leading-6 text-gray-900">CV</dt>
+      <dt className="text-sm font-medium leading-6 text-gray-900">Pièce jointe</dt>
       <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
         {callout.cv}
-        <button onClick={() => handleDownload(callout.cv)}><b>Télécharger</b></button>
+        <button className="float-right mr-16 flex gap-2 text-xl" onClick={() => handleDownload(callout.cv)}> <b className="">Voir</b>
+          <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 576 512">
+      <path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/>
+      </svg></button>
       </dd>
-    </div>
-    
-    </div>
-
-                  </div>  
+                   </div>  
                   <div className=" mt-6 border-t border-gray-200">
   
   <div className="mt-6 flex items-center justify-end gap-x-6">
-        <Link to={'/home'} type="button" className="rounded-md bg-gray-100 px-2.5 py-1.5 text-teal-500 font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+        <Link to={'/dashboard'} type="button" className="rounded-md bg-gray-100 px-2.5 py-1.5 text-teal-500 font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
           Annuler
         </Link>
-        <button
-  type="button"
-  onClick={() => envoyerEmail(document.querySelector('textarea').value)}
-  className="rounded-md bg-teal-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
+        <Link to={'/alert'}
+  
+  className="rounded-md bg-teal-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
 >
   Envoyer
-</button>
+</Link>
         </div>
                   </div>
                   </div>

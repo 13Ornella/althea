@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import Header from "../Header";
 import Candidature from "./candidature";
+import Flydash1 from "./flydash1";
+import { RingLoader } from 'react-spinners';
 
 export default function accountPage() {
   const location = useLocation();
@@ -21,11 +23,16 @@ export default function accountPage() {
     niveau:'',
     experience:'',
     adresse:'',
+    postule:'',
     offreId: offreId
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setIsLoading(true);
 
     try {
       const formD = new FormData()
@@ -39,11 +46,12 @@ export default function accountPage() {
       formD.append('niveau', formData.niveau)
       formD.append('experience', formData.experience)
       formD.append('adresse', formData.adresse)
+      formD.append('postule', formData.postule)
       formD.append('offreId', offreId)
       formD.append('file',file)
       const response = await axios.post('http://localhost:3001/account', formD);
       console.log('Response from server:', response.data);
-      alert ("Informations enregistrées avec succes!")
+      alert ("Informations enregistrées avec succes! Vous allez recevoir un message d'alerte pour l'entretien si vous avez les compétences requises")
       // Vous pouvez faire quelque chose avec la réponse du serveur ici
 
       /*const formD = new FormData()
@@ -53,8 +61,12 @@ export default function accountPage() {
       .then(res => {})
       .catch(err => console.log(err));*/
 
+      setIsLoading(false);
+
     } catch (error) {
       console.error('Error:', error);
+
+      setIsLoading(false);
     }
   };
 
@@ -69,7 +81,8 @@ export default function accountPage() {
     
     <div>
      
-    <div className="" >
+    <div className="relative" >
+      <Flydash1/>
     <Header/>
     <form  onSubmit={handleSubmit} method="POST">
       
@@ -93,8 +106,7 @@ export default function accountPage() {
                   type="text"
                   name="nom"
                   id="nom"
-                  autoComplete="given-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full p-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   value={formData.nom}
                   onChange={handleChange}
                 />
@@ -110,8 +122,7 @@ export default function accountPage() {
                   type="text"
                   name="prenom"
                   id="prenom"
-                  autoComplete="family-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full p-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   value={formData.prenom}
                   onChange={handleChange}
                 />
@@ -127,8 +138,7 @@ export default function accountPage() {
                   id="email"
                   name="email"
                   type="email"
-                  autoComplete="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full p-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   value={formData.email}
                   onChange={handleChange}
                 />
@@ -144,8 +154,7 @@ export default function accountPage() {
                   id="telephone"
                   name="telephone"
                   type="number"
-                  autoComplete=""
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full p-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   value={formData.telephone}
                   onChange={handleChange}
                 />
@@ -160,9 +169,8 @@ export default function accountPage() {
                 <select
                   id="situation"
                   name="situation"
-                  autoComplete="country-name"
                   placeholder="Selectionner ici..."
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                  className="block w-full p-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                   value={formData.situation}
                   onChange={handleChange}
                 >
@@ -182,9 +190,8 @@ export default function accountPage() {
                 <select
                   id="sexe"
                   name="sexe"
-                  autoComplete="country-name"
                   placeholder="Selectionnez ici..."
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                  className="block w-full p-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                   value={formData.sexe}
                   onChange={handleChange}
                 >
@@ -205,8 +212,7 @@ export default function accountPage() {
                   type="text"
                   name="domaine"
                   id="domaine"
-                  autoComplete="street-address"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full p-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   value={formData.domaine}
                   onChange={handleChange}/>
               </div>
@@ -222,9 +228,7 @@ export default function accountPage() {
               <select
                   id="niveau"
                   name="niveau"
-                  autoComplete=""
-                
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600  sm:text-sm sm:leading-6"
+                  className="block w-full p-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600  sm:text-sm sm:leading-6"
                   value={formData.niveau}
                   onChange={handleChange}
                 >
@@ -249,16 +253,15 @@ export default function accountPage() {
                   type="number"
                   name="experience"
                   id="experience"
-                  autoComplete="postal-code"
-                  className="block w-full  rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full p-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   value={formData.experience}
                   onChange={handleChange}/>
               </div>
             </div>
           </div>
         
- 
-        <div className="sm:col-span-2 ">
+ <div className="flex gap-x-10 mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div className="sm:col-span-2 sm:col-start-1">
               <label htmlFor="domaine" className="block text-sm font-medium leading-6 text-gray-900">
                 Adresse
               </label>
@@ -267,14 +270,29 @@ export default function accountPage() {
                   type="text"
                   name="adresse"
                   id="adresse"
-                  autoComplete=""
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full p-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   value={formData.adresse}
                   onChange={handleChange}
                 />
               </div>
-            </div>
+              </div>
 
+              <div className="sm:col-span-2 ">
+              <label htmlFor="domaine" className="block text-sm font-medium leading-6 text-gray-900">
+                Date
+              </label>
+              <div className="mt-2">
+                <input
+                  type="date"
+                  name="postule"
+                  id="postule"
+                  className="block w-full p-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  value={formData.postule}
+                  onChange={handleChange}
+                />
+              </div>
+              </div>
+              </div>
             <div className="sm:col-span-2 sm:col-start-1">
             <label htmlFor="address" className="block text-sm font-medium leading-6 text-gray-900">
                 Votre CV
@@ -284,8 +302,7 @@ export default function accountPage() {
                   type="file"
                   name="file"
                   id="cv"
-                  autoComplete="street-address"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full p-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   onChange={(e)=>setFile(e.target.files[0])}
                 />
               </div>
@@ -295,13 +312,19 @@ export default function accountPage() {
         <Link to={'/home'} type="button" className="rounded-md bg-gray-100 px-2.5 py-1.5 text-teal-500 font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
           Annuler
         </Link>
-        <button 
-          type="submit"
-          className="rounded-md bg-teal-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline 
-          focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
-        >
-          Enregistrer
-        </button>
+        <button
+            type="submit"
+            className="rounded-md bg-teal-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500 relative"
+            disabled={isLoading} // Disable the button when isLoading is true
+          >
+            {isLoading && (
+              <span className="absolute inset-0 flex items-center justify-center">
+                {/* Use the RingLoader from react-spinners */}
+                <RingLoader color={'#ffffff'} loading={isLoading} size={30} />
+              </span>
+            )}
+            Enregistrer
+          </button>
         </div>
       </div>
     

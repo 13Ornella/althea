@@ -43,7 +43,7 @@ export default function home(){
         <h1 className="font-bold text-7xl text-blue-950 items-center pt-22 pb-10">Bienvenu(e)! <br/> Cherchez-vous un emplois?</h1>
       <span className="text-3xl font-semibold text-blue-950  ">Veillez cliquer sur le boutton ci-dessous pour consulter les offres que notre société vous propose</span> <br /> <br /> <br />
       <br /> <br />
-      <Link to={'/canoffre'} className="inline-flex w-full justify-center mb-28 rounded-md bg-teal-600 px-3 py-2 text-2xl font-semibold text-white shadow-sm hover:bg-blue-950 sm:ml-3 sm:w-auto "> 
+      <Link to={'/canlog'} className="inline-flex w-full justify-center mb-28 rounded-md bg-teal-600 px-3 py-2 text-2xl font-semibold text-white shadow-sm hover:bg-blue-950 sm:ml-3 sm:w-auto "> 
       Consulter </Link>
      </div>
    

@@ -31,7 +31,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   );
 };
 
-export default function Statistique() {
+export default function Piechart() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function Statistique() {
     <div className='bg-white p-6 rounded-sm border-gray-200 flex flex-col shadow-md mt-0 ml-0'>
                <div className='w-full flex-1 flex-col text-xs'> 
         <ResponsiveContainer width="100%" height="100%">
-          <PieChart width={1000} height={1000}>
+          <PieChart width={8000} height={8000}>
             <Pie
               data={data}
               cx="50%"

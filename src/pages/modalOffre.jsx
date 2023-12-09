@@ -143,7 +143,6 @@ export default function ModalOffre() {
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-gray-400 focus:bg-gray-200 focus:border-gray-400"
                                 id="grid-zip"
                                 type="date"
-                  
                                 placeholder=""
                                 onChange={handleChange}
                                 value={formData.date} />

@@ -11,10 +11,8 @@ import entretien from './pages/entretien.jsx';
 import Dashboard from './pages/dashboard.jsx';
 import dashgrid from './dashgrid.jsx';
 import offre from './pages/offre.jsx';
-import statistique from './pages/statistique.jsx';
 import { FooterWithSocialLinks } from './pages/footer.jsx';
 import Storefront from './pages/Storefront.jsx';
-import admHome from './pages/admHome.jsx';
 import Header from './Header.jsx';
 import Barchart from './pages/barchart.jsx';
 import CanOffre from './pages/canOffre.jsx';
@@ -27,6 +25,11 @@ import SupprimerOffre from './pages/supprimerOffre.jsx';
 import Contact from './pages/contact.jsx';
 import Candidats from './pages/candidats.jsx';
 import ProtectedRoute from './pages/protectedRoute.jsx';
+import Statistique from './pages/statistique.jsx';
+import login from './pages/login.jsx';
+import Diagramme from './pages/diagramme.jsx';
+import Pie from './pages/piechart.jsx';
+import Piechart from './pages/piechart.jsx';
 
 
 ///axios.defaults.baseURL = 'http://localhost:8080';
@@ -42,6 +45,7 @@ const App = () => {
 <Route path='/' Component={FlyoutMenu}/>
 <Route path='/' Component={Flydash}/>
 <Route path='/foot' Component={ FooterWithSocialLinks }/>
+<Route path='/pie' Component={Piechart}/>
 <Route path='/canoffre' Component={CanOffre}/>
 <Route path="/offre" Component={offre}/>
 <Route path='/bar' Component={Barchart}/>
@@ -49,7 +53,6 @@ const App = () => {
 <Route path='/store' Component={Storefront}/>
 <Route path="/login" Component={loginPage} />
 <Route path="/register" Component={RegisterPage}/>
-<Route path='/stat' Component={statistique}/>
 <Route path='/home' Component={home}/>
 <Route path="/account" Component={accountPage}/>
 <Route path='/candidature' Component={candidature}/>
@@ -60,11 +63,14 @@ const App = () => {
 <Route path='/' Component={Flydash}/>
 <Route path='/dashboard' Component={Dashboard}/>
 <Route path='/side' Component={Sidebar}/>
-<Route path='/statistique' Component={statistique}/>
 <Route path='/candidat' Component={Candidats}/>
 <Route path='/suppr' Component={SupprimerOffre}/>
 <Route path='/alert' Component={Alert}/>
 <Route path='/supprcan' Component={SupprimerCandidat}/>
+<Route path='/statistique' Component={Statistique}/>
+<Route path='/canlog' Component={login}/>
+<Route path='/stat' Component={Diagramme}/>
+<Route index Component={Storefront}/>
 </Route>
 </Routes>
 </BrowserRouter>

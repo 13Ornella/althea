@@ -5,7 +5,7 @@ import Header from '../Header';
 import { Link } from 'react-router-dom';
 
 
-export default function Barchart() {
+export default function Diagramme() {
     const generateRandomColor = () => {
         const letters = '0123456789ABCDEF';
         let color = '#';
@@ -49,9 +49,15 @@ export default function Barchart() {
 
   return ( 
     <div className='bg-white rounded-sm border-gray-200 flex flex-col shadow-md ml-0'>
-                     <BarChart
-      width={600}
-      height={300}
+      <div className="flex flex-shrink-0 items-center sm:mr-4 md:mr-8 lg:mr-12 m-6">
+               <Link to={'/dashboard'}> <img
+                  className="h-8 w-auto"
+                  src="https://www.althea.mg/wp-content/themes/hello-theme-child/images/logo-althea-380x110.png"
+                   /> </Link>
+              </div>
+    <BarChart
+      width={1500}
+      height={600}
       data={data}
       margin={{
         top: 20,

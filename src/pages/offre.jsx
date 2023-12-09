@@ -6,6 +6,7 @@ import ModalOffre from "./modalOffre";
 import ModifierOffre from "./ModifierOffre";
 import "./i18n";
 import SupprimerOffre from "./supprimerOffre";
+import Flydash2 from "./flydash2";
 
 export default function offre() {
   const [search, setSearch] = useState("");
@@ -129,9 +130,10 @@ export default function offre() {
   });
 
   return (
-    <div className="">
+    <div>
       <Header />
-
+                              <Flydash2/>
+            
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="relative fixed ml-[30rem]">
           <form method="POST" action="/search">
@@ -141,10 +143,11 @@ export default function offre() {
               value={search}
               onChange={handleSearchInputChange}
               className="pl-8 bg-inherit text-sm focus:outline-none active:outline-none mt-2.5 ml-2.5 h-10 w-[24rem] border border-gray-300 
-        rounded-md shadow-md px-4"
+        rounded-md shadow-md px-4 fixed"
             />
+            
             <svg
-              class="w-5 h-5 text-gray-800 dark:text-gray-400 absolute mt-1 ml-4 top-1/2 -translate-y-1/2"
+              className=" fixed w-7 h-7 text-gray-400 dark:text-gray-400 absolute relative fixed ml-4 top-1 translate-y-1/2 pb-1 pr-1"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -160,12 +163,14 @@ export default function offre() {
             </svg>
           </form>
         </div>
+
+        
         <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
           <button
             className="mt-4 float-right inline-flex w-full justify-center rounded-md bg-teal-600 px-3 py-2  font-semibold text-white shadow-sm hover:bg-blue-950 sm:ml-3 sm:w-auto ml-18"
             onClick={openModal}
           >
-            Ajouter
+            Publier nouvelle offre
           </button>
           <h2 className="text-4xl font-bold text-blue-950">Nos offres</h2>
 

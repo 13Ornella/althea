@@ -9,6 +9,7 @@ const fs = require("fs");
 const os = require("os");
 const bodyParser = require('body-parser');
 const mailgunTransport = require('nodemailer-mailgun-transport');
+const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
@@ -42,6 +43,16 @@ db.connect((error) => {
     console.log("Connected");
   }
 });
+
+app.get('/',(req,res)=>{
+  if(req.session.role){
+    return res.json({valid: true, role: req.session.role})
+  }else{
+    return res.json({valid: false})
+  }
+})
+
+
 
 
 app.post("/users", (req, res) => {
@@ -111,7 +122,7 @@ const upload = multer({storage})
 
  //accountPage.jsx
  app.post('/account',upload.single('file'), (req, res) =>{
-  const sql= "INSERT INTO account (`nom`,`prenom`,`email`,`telephone`,`situation`,`sexe`,`domaine`,`niveau`,`experience`,`adresse`,`cv`,`offreId`) VALUES (?)";
+  const sql= "INSERT INTO account (`nom`,`prenom`,`email`,`telephone`,`situation`,`sexe`,`domaine`,`niveau`,`experience`,`adresse`,`postule`,`cv`,`offreId`) VALUES (?)";
   const sql2 = "UPDATE offre o JOIN (SELECT offreId, COUNT(*) AS compteur FROM account GROUP BY offreId) a ON o.id = a.offreId SET o.Postulant = a.compteur";
   
   const values = [
@@ -125,6 +136,7 @@ const upload = multer({storage})
      req.body.niveau,
      req.body.experience,
      req.body.adresse,
+     req.body.postule,
      req.file.filename,
      req.body.offreId
   ]
@@ -168,14 +180,15 @@ if(err){
   return res.json("Error");
 }
 else if (data.length > 0){
-  console.log("Ok")
-  return res.json("Success")
+  console.log(data[0].role);
+  return res.json({Login: true, role: data[0].role})
 }
 else{
-  return res.json("Essayez encore!")
+  return res.json({Login: false})
 }
 })
 })
+
 app.get("/offre", (req, res) => {
   db.query("SELECT * FROM offre", (err, results) => {
     if (err) {
@@ -220,6 +233,29 @@ app.delete("/offre/:id", (req, res) => {
           .status(404)
           .json({ error: "The 'offre' with the specified ID was not found." });
       } else {
+        res.status(204).send();
+      }
+    }
+  });
+});
+
+//suppresion candidature
+app.delete('/candidature/:id', (req, res) => {
+  const offreId = req.params.id;
+  
+  // Use SQL to delete the "offre" with the specified ID from your database
+  const sql = "DELETE FROM account WHERE id = ?";
+  
+  db.query(sql, [offreId], (err, result) => {
+    if (err) {
+      console.error("Error deleting 'candidature':", err);
+      res.status(500).json({ error: "An error occurred while deleting the 'candidature'." });
+    } else {
+      // Check if any rows were affected; if not, the "offre" with the provided ID doesn't exist
+      if (result.affectedRows === 0) {
+        res.status(404).json({ error: "The 'candidature' with the specified ID was not found." });
+      } else {
+        // Successful deletion
         res.status(204).send();
       }
     }
